@@ -25,6 +25,7 @@ class Tictactoe(QObject):
             button.clicked.connect( lambda checked, button=button : self.pressed(button))
 
     def update_status(self):
+        """ This function runs after every turn to check the status of the game and update labels. """
         # Set label after turn
         if self.cross:
             self.ui.label.setText("Cross plays")
@@ -47,6 +48,7 @@ class Tictactoe(QObject):
             self.ui.label.setText("Circle wins!")
 
     def pressed(self, button):
+        """ This function gets run everytime you press a square. """
         # Check if the game is completed, and resets if so
         if self.game_over:
             self.clear()
@@ -65,6 +67,7 @@ class Tictactoe(QObject):
             self.update_status()
 
     def clear(self):
+        """ This function clears the board and resets the game logic. """
         # Remove button text
         for button in self.buttons:
             button.setText("")
