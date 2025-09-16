@@ -14,6 +14,8 @@ class Tictactoe(QObject):
         super().__init__()
         self.ui = loader.load("window.ui", None)
         self.cross = True
+        self.cross_wins = 0
+        self.circle_wins = 0
         self.game_over = False
         self.pressed_buttons = []
 
@@ -34,9 +36,13 @@ class Tictactoe(QObject):
             self.ui.label.setText("Tie!")
         # Check if anyone has won
         if logic.check_for_wins() == "x":
+            self.cross_wins += 1
+            self.ui.crossLabel.setText(f"Cross wins: {self.cross_wins}")
             self.game_over = True
             self.ui.label.setText("Cross wins!")
         elif logic.check_for_wins() == "o":
+            self.circle_wins += 1
+            self.ui.circleLabel.setText(f"Circle wins: {self.circle_wins}")
             self.game_over = True
             self.ui.label.setText("Circle wins!")
 
